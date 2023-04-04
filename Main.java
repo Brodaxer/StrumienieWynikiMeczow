@@ -1,29 +1,38 @@
 
 import java.util.List;
-import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
+        System.out.println("Wszystkie mecze:");
         List<FootbalMatches> footbalMatchesList = createMatches();
         footbalMatchesList.stream().sorted((f1, f2) -> -Integer.compare(f1.getScoreHome(), f2.getScoreVisiting()))
                 .forEach(System.out::println);
-        System.out.println("Podaj nazwe kraju aby odfiltrowac: ");
-        String name = sc.nextLine();
+        System.out.println(">>>>");
+        System.out.println("Wszystkie spotkania Polski: ");
+        String name = "Polska";
         filtrByCountry(footbalMatchesList, name).forEach(System.out::println);
-        System.out.println("Suma wszystkich bramek " +scoreCount(footbalMatchesList));
+        System.out.println(">>>>");
+        System.out.println("Suma wszystkich bramek " + scoreCount(footbalMatchesList));
+        System.out.println("Liczba dużyn bioracych udzial w rozgrywkach " +uniqueCount(footbalMatchesList));
     }
-
+    private static int uniqueCount(List<FootbalMatches> matches){
+        TreeSet<String> names = new TreeSet<>();
+        matches.forEach(f -> names.add(f.getHomeTeam())
+        );
+        matches.forEach(f -> names.add(f.getVisitingTeam()));
+        return names.size();
+    }
     private static List<FootbalMatches> filtrByCountry(List<FootbalMatches> matches, String name) {
         return matches.stream()
                 .filter(footbalMatches -> name.equals(footbalMatches.getHomeTeam()) || name.equals(footbalMatches.getVisitingTeam())).toList();
     }
-    private static int scoreCount (List<FootbalMatches> matches) {
-        Integer sum = matches.stream()
+
+    private static int scoreCount(List<FootbalMatches> matches) {
+        return matches.stream()
                 .map(FootbalMatches::bothScore)
-                .reduce(0,Integer::sum);
-        return sum;
+                .reduce(0, Integer::sum);
     }
 
     private static List<FootbalMatches> createMatches() {
