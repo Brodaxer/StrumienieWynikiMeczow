@@ -58,7 +58,9 @@ class FootbalMatches {
     public int hashCode() {
         return Objects.hash(homeTeam, visitingTeam, scoreHome, scoreVisiting);
     }
-
+    public int bothScore(){
+        return scoreVisiting + scoreHome;
+    }
     @Override
     public String toString() {
         return homeTeam + " - "+ visitingTeam+"("+scoreHome+":"+scoreVisiting+")";
