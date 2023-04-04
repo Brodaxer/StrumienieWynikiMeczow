@@ -12,13 +12,12 @@ public class Main {
                 .forEach(System.out::println);
         System.out.println("Podaj nazwe kraju aby odfiltrowac: ");
         String name =sc.nextLine();
-        footbalMatchesList.stream().filter(f -> name.equals(f.getHomeTeam()) || name.equals(f.getVisitingTeam()))
-                .forEach(System.out::println);
+        filtrByCountry(footbalMatchesList,name).forEach(System.out::println);
     }
-//    private static List<FootbalMatches> filtrByCountry(List<FootbalMatches> matches,String name){
-//        matches.stream()
-//                .filter(name ->name == )
-//    }
+    private static List<FootbalMatches> filtrByCountry(List<FootbalMatches> matches,String name){
+        return matches.stream()
+                .filter(footbalMatches -> name.equals(footbalMatches.getHomeTeam()) || name.equals(footbalMatches.getVisitingTeam())).toList();
+    }
     private static List<FootbalMatches> createMatches (){
 
         return List.of(
