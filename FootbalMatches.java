@@ -61,11 +61,6 @@ class FootbalMatches {
 
     @Override
     public String toString() {
-        return "FootbalMatches{" +
-                "homeTeam='" + homeTeam + '\'' +
-                ", visitingTeam='" + visitingTeam + '\'' +
-                ", scoreHome=" + scoreHome +
-                ", scoreVisiting=" + scoreVisiting +
-                '}';
+        return homeTeam + " - "+ visitingTeam+"("+scoreHome+":"+scoreVisiting+")";
     }
 }

@@ -1,13 +1,26 @@
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        List<FootbalMatches> footbalMatchesList = createMatches();
+        Scanner sc = new Scanner(System.in);
 
+        List<FootbalMatches> footbalMatchesList = createMatches();
+        footbalMatchesList.stream().sorted((f1,f2) -> -Integer.compare(f1.getScoreHome(), f2.getScoreVisiting()))
+                .forEach(System.out::println);
+        System.out.println("Podaj nazwe kraju aby odfiltrowac: ");
+        String name =sc.nextLine();
+        footbalMatchesList.stream().filter(f -> name.equals(f.getHomeTeam()) || name.equals(f.getVisitingTeam()))
+                .forEach(System.out::println);
     }
+//    private static List<FootbalMatches> filtrByCountry(List<FootbalMatches> matches,String name){
+//        matches.stream()
+//                .filter(name ->name == )
+//    }
     private static List<FootbalMatches> createMatches (){
-        // Brazylia, Francja, Polska, Niemcy, Anglia, Argentyna, Włochym Irlandia, Portugalia, San Marino,
+
         return List.of(
                 new FootbalMatches("Brazylia",5,"Francja",1),
                 new FootbalMatches("Polska",0,"Niemcy",0),
