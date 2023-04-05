@@ -51,7 +51,7 @@ class FootbalMatches {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FootbalMatches that = (FootbalMatches) o;
-        return scoreHome == that.scoreHome && scoreVisiting == that.scoreVisiting && Objects.equals(homeTeam, that.homeTeam) && Objects.equals(visitingTeam, that.visitingTeam);
+        return  Objects.equals(homeTeam, that.homeTeam) && Objects.equals(visitingTeam, that.visitingTeam);
     }
 
     @Override

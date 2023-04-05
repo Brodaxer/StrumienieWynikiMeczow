@@ -2,6 +2,7 @@
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,15 +16,22 @@ public class Main {
         filtrByCountry(footbalMatchesList, name).forEach(System.out::println);
         System.out.println(">>>>");
         System.out.println("Suma wszystkich bramek " + scoreCount(footbalMatchesList));
-        System.out.println("Liczba dużyn bioracych udzial w rozgrywkach " +uniqueCount(footbalMatchesList));
+        System.out.println("Liczba dużyn bioracych udzial w rozgrywkach " + uniqueCount(footbalMatchesList));
+        footbalMatchesList.stream().flatMap(u -> Stream.of(u.getVisitingTeam()))
+                .distinct()
+                .forEach(System.out::println);
     }
-    private static int uniqueCount(List<FootbalMatches> matches){
-        TreeSet<String> names = new TreeSet<>();
-        matches.forEach(f -> names.add(f.getHomeTeam())
-        );
-        matches.forEach(f -> names.add(f.getVisitingTeam()));
-        return names.size();
+
+    private static long uniqueCount(List<FootbalMatches> matches) {
+
+       return  matches.stream()
+                .flatMap((unique) -> Stream.of(unique.getHomeTeam() + unique.getVisitingTeam() ))
+                .distinct()
+                .count();
     }
+
+    ;
+
     private static List<FootbalMatches> filtrByCountry(List<FootbalMatches> matches, String name) {
         return matches.stream()
                 .filter(footbalMatches -> name.equals(footbalMatches.getHomeTeam()) || name.equals(footbalMatches.getVisitingTeam())).toList();
@@ -36,7 +44,6 @@ public class Main {
     }
 
     private static List<FootbalMatches> createMatches() {
-
         return List.of(
                 new FootbalMatches("Brazylia", 5, "Francja", 1),
                 new FootbalMatches("Polska", 0, "Niemcy", 0),
