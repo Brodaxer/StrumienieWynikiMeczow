@@ -17,9 +17,7 @@ public class Main {
         System.out.println(">>>>");
         System.out.println("Suma wszystkich bramek " + scoreCount(footbalMatchesList));
         System.out.println("Liczba dużyn bioracych udzial w rozgrywkach " + uniqueCount(footbalMatchesList));
-        footbalMatchesList.stream().flatMap(u -> Stream.of(u.getVisitingTeam()))
-                .distinct()
-                .forEach(System.out::println);
+
     }
 
     private static long uniqueCount(List<FootbalMatches> matches) {
