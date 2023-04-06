@@ -13,7 +13,9 @@ class FootbalMatches {
         this.visitingTeam = visitingTeam;
         this.scoreVisiting = scoreVisiting;
     }
-
+    public int sortScore(){
+        return scoreHome - scoreVisiting;
+    }
     public String getHomeTeam() {
         return homeTeam;
     }
